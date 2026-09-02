@@ -1,0 +1,16 @@
+# CMake build trees
+/build/
+/build-*/
+/out/
+/.vs/
+/.vscode/
+/CMakeUserPresets.json
+
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.pdb
+*.ilk
+*.obj
+*.exe

@@ -1,0 +1,58 @@
+#pragma code_page(65001)
+
+#include <windows.h>
+#include "resource.h"
+
+1 24 "app.manifest"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+IDR_MAIN_MENU MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit", IDM_FILE_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Storage cleanup", IDM_VIEW_CLEANUP
+        MENUITEM "&Download repair", IDM_VIEW_REPAIR
+        MENUITEM "&Settings", IDM_VIEW_SETTINGS
+        MENUITEM SEPARATOR
+        POPUP "&Language"
+        BEGIN
+            MENUITEM "&English", IDM_LANGUAGE_ENGLISH
+            MENUITEM "简体中文(&C)", IDM_LANGUAGE_SIMPLIFIED_CHINESE
+        END
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About Nvidia App Cleaner", IDM_HELP_ABOUT
+    END
+END
+
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+
+IDR_MAIN_MENU MENU
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "退出(&X)", IDM_FILE_EXIT
+    END
+    POPUP "查看(&V)"
+    BEGIN
+        MENUITEM "存储清理(&C)", IDM_VIEW_CLEANUP
+        MENUITEM "下载修复(&R)", IDM_VIEW_REPAIR
+        MENUITEM "设置(&S)", IDM_VIEW_SETTINGS
+        MENUITEM SEPARATOR
+        POPUP "语言(&L)"
+        BEGIN
+            MENUITEM "English(&E)", IDM_LANGUAGE_ENGLISH
+            MENUITEM "简体中文(&C)", IDM_LANGUAGE_SIMPLIFIED_CHINESE
+        END
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "关于 Nvidia App Cleaner(&A)", IDM_HELP_ABOUT
+    END
+END
