@@ -105,6 +105,7 @@ enum class TextId : std::size_t {
     cleanup_group_recommended,
     cleanup_group_optional,
     cleanup_group_rollback_drivers,
+    about_content,
     count,
 };
 

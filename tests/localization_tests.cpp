@@ -58,6 +58,17 @@ int main() {
         return 1;
     }
 
+    constexpr wchar_t repository_url[] = L"https://github.com/JonDoe828/NvidiaAppCleaner";
+    for (const UiLanguage language : {UiLanguage::english, UiLanguage::simplified_chinese}) {
+        const std::wstring about = nvidia_app_cleaner::text(language, TextId::about_content);
+        if (about.find(repository_url) == std::wstring::npos ||
+            about.find(L"Copyright (c) 2026 JonDoe828") == std::wstring::npos ||
+            about.find(L"MIT License") == std::wstring::npos) {
+            std::cerr << "About text is missing repository or license attribution\n";
+            return 1;
+        }
+    }
+
     std::cout << "All localization tests passed\n";
     return 0;
 }
