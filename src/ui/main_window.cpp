@@ -13,6 +13,7 @@
 #include <windows.h>
 
 #include <commctrl.h>
+#include <shellapi.h>
 
 #include <algorithm>
 #include <array>
@@ -46,6 +47,7 @@ constexpr int kMinimumCategoryColumnWidthDip = 210;
 constexpr int kMinimumLocationColumnWidthDip = 240;
 constexpr int kMinimumSizeColumnWidthDip = 80;
 constexpr int kMinimumStatusColumnWidthDip = 110;
+constexpr wchar_t kRepositoryUrl[] = L"https://github.com/JonDoe828/NvidiaAppCleaner";
 
 HWND g_list_view = nullptr;
 HWND g_heading_label = nullptr;
@@ -153,6 +155,37 @@ DWORD g_settings_error = ERROR_SUCCESS;
 
 const wchar_t *tr(nvidia_app_cleaner::TextId id) {
     return nvidia_app_cleaner::text(g_language, id);
+}
+
+HRESULT CALLBACK about_dialog_callback(HWND dialog, UINT notification, WPARAM, LPARAM data,
+                                       LONG_PTR) {
+    if (notification == TDN_HYPERLINK_CLICKED && data != 0) {
+        const auto *url = reinterpret_cast<const wchar_t *>(data);
+        if (lstrcmpW(url, kRepositoryUrl) == 0) {
+            static_cast<void>(
+                ShellExecuteW(dialog, L"open", kRepositoryUrl, nullptr, nullptr, SW_SHOWNORMAL));
+        }
+    }
+    return S_OK;
+}
+
+void show_about_dialog(HWND owner) {
+    const TASKDIALOGCONFIG dialog{
+        .cbSize = sizeof(TASKDIALOGCONFIG),
+        .hwndParent = owner,
+        .hInstance = GetModuleHandleW(nullptr),
+        .dwFlags = TDF_ENABLE_HYPERLINKS | TDF_POSITION_RELATIVE_TO_WINDOW | TDF_SIZE_TO_CONTENT,
+        .dwCommonButtons = TDCBF_OK_BUTTON,
+        .pszWindowTitle = tr(nvidia_app_cleaner::TextId::window_title),
+        .pszMainInstruction = tr(nvidia_app_cleaner::TextId::window_title),
+        .pszContent = tr(nvidia_app_cleaner::TextId::about_content),
+        .pfCallback = about_dialog_callback,
+    };
+
+    if (FAILED(TaskDialogIndirect(&dialog, nullptr, nullptr, nullptr))) {
+        MessageBoxW(owner, kRepositoryUrl, tr(nvidia_app_cleaner::TextId::window_title),
+                    MB_OK | MB_ICONINFORMATION);
+    }
 }
 
 const wchar_t *channel_name(nvidia_app_cleaner::DriverChannel channel) {
@@ -2364,11 +2397,7 @@ LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM w_param, LPARAM l
             return 0;
         }
         if (LOWORD(w_param) == IDM_HELP_ABOUT) {
-            const std::wstring about_text =
-                std::wstring(tr(nvidia_app_cleaner::TextId::window_title)) + L"\n\n" +
-                tr(nvidia_app_cleaner::TextId::main_description);
-            MessageBoxW(window, about_text.c_str(), tr(nvidia_app_cleaner::TextId::window_title),
-                        MB_OK | MB_ICONINFORMATION);
+            show_about_dialog(window);
             return 0;
         }
         if (LOWORD(w_param) == IDM_FILE_EXIT) {

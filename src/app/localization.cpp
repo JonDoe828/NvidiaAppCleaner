@@ -122,6 +122,9 @@ constexpr TextTable kEnglish{
     L"Recommended cleanup (selected by default)",
     L"Optional cleanup",
     L"Rollback drivers",
+    L"Version 0.1.0\n\nOfficial repository:\n<a "
+    L"href=\"https://github.com/JonDoe828/NvidiaAppCleaner\">github.com/JonDoe828/"
+    L"NvidiaAppCleaner</a>\n\nCopyright (c) 2026 JonDoe828\nMIT License",
 };
 
 constexpr TextTable kSimplifiedChinese{
@@ -223,6 +226,9 @@ constexpr TextTable kSimplifiedChinese{
     L"建议清理（默认勾选）",
     L"可选清理",
     L"回滚驱动",
+    L"版本 0.1.0\n\n官方仓库：\n<a "
+    L"href=\"https://github.com/JonDoe828/NvidiaAppCleaner\">github.com/JonDoe828/"
+    L"NvidiaAppCleaner</a>\n\nCopyright (c) 2026 JonDoe828\nMIT License",
 };
 
 static_assert(kEnglish.size() == kSimplifiedChinese.size());
