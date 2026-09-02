@@ -6,8 +6,8 @@
 1 24 "app.manifest"
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,1,0,0
- PRODUCTVERSION 0,1,0,0
+ FILEVERSION 0,1,1,0
+ PRODUCTVERSION 0,1,1,0
  FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
 #ifdef _DEBUG
  FILEFLAGS VS_FF_DEBUG
@@ -23,12 +23,12 @@ BEGIN
         BLOCK "040904B0"
         BEGIN
             VALUE "FileDescription", "Nvidia App Cleaner\0"
-            VALUE "FileVersion", "0.1.0.0\0"
+            VALUE "FileVersion", "0.1.1.0\0"
             VALUE "InternalName", "NvidiaAppCleaner\0"
             VALUE "LegalCopyright", "Copyright (c) 2026 JonDoe828\0"
             VALUE "OriginalFilename", "NvidiaAppCleaner.exe\0"
             VALUE "ProductName", "Nvidia App Cleaner\0"
-            VALUE "ProductVersion", "0.1.0\0"
+            VALUE "ProductVersion", "0.1.1\0"
         END
     END
     BLOCK "VarFileInfo"
